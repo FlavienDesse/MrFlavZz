@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html"; >
+<meta charset="UTF-8">
+<title>Stegano</title>
+
+</head>
+  <body>
+  
+  
+  
+  <div id="Upload" class="Upload" >
+ <input id="file" type="file" onchange="onChange(this)">
+</div>
+
+
+  <div id="mop" >
+lol
+</div>
+
+
+<input value="C'est parti !" onclick="go()" maxlength="11" type="button" id="parti" >
+<canvas id="monCanvas" > </canvas>
+<script type="text/javascript">
+var canvas = document.getElementById("monCanvas");
+var ctx = canvas.getContext("2d");
+
+
+var binaire_composante_rouge = []
+var binaire_composante_vert = []
+var binaire_composante_bleu = []
+var binaire_composante_opa = []
+ 
+var binaire_composante_rouge_string = ""
+var binaire_composante_vert_string = ""
+var binaire_composante_bleu_string = ""
+binaire_composante_opa_string= ""
+
+
+ 
+const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];    
+
+ 
+ function onChange(sender)
+{
+   
+	
+	var file = sender.files[0];
+    var fileType = file["type"];
+    if(allowedTypes.indexOf(fileType) == -1)
+    {
+        alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+    }
+    else
+    {
+        var reader = new FileReader();
+        reader.onload = function(e)
+{
+    var img = new Image();
+    img.src = e.target.result;
+    img.onload = function()
+    {
+        ctx.canvas.width = img.width;
+        ctx.canvas.height = img.height;
+       
+        ctx.drawImage(img, 0, 0);
+        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+        ctx.putImageData(PixelsImage, 0, 0);
+
+		
+    }
+};
+        reader.readAsDataURL(file);
+    
+  }
+
+}
+
+
+function go() {
+
+
+for (i=0 ; i<PixelsImage.data.length; i=i+4) {
+for(a=0 ; a<8 ; a++ ) {
+binaire_composante_rouge.push(binaire(PixelsImage.data[i]).charAt(a))
+binaire_composante_vert.push(binaire(PixelsImage.data[i+1]).charAt(a))
+binaire_composante_bleu.push(binaire(PixelsImage.data[i+2]).charAt(a))
+binaire_composante_opa.push(binaire(PixelsImage.data[i+3]).charAt(a))
+
+}
+}
+
+for (b=0  ; b<binaire_composante_opa.length;  b=b+8) {
+
+
+x_r=binaire_composante_opa[7+b]
+y_v=binaire_composante_opa[6+b]
+z_b=binaire_composante_opa[5+b]
+
+
+
+a1=binaire_composante_rouge[0+b]
+b1=binaire_composante_rouge[1+b]
+c1=binaire_composante_rouge[2+b]
+d1=binaire_composante_rouge[3+b]
+
+
+a=binaire_composante_rouge[4+b]
+mop=binaire_composante_rouge[5+b]
+c=binaire_composante_rouge[6+b]
+d=binaire_composante_rouge[7+b]
+
+
+
+binaire_composante_rouge[0+b]=a
+binaire_composante_rouge[1+b]=mop
+binaire_composante_rouge[2+b]=c
+binaire_composante_rouge[3+b]=d
+
+binaire_composante_rouge[4+b]=a1
+binaire_composante_rouge[5+b]=b1
+binaire_composante_rouge[6+b]=c1
+binaire_composante_rouge[7+b]=x_r
+
+
+
+
+
+
+
+
+
+
+
+e=binaire_composante_vert[4+b]
+f=binaire_composante_vert[5+b]
+g=binaire_composante_vert[6+b]
+h=binaire_composante_vert[7+b]
+
+
+e1=binaire_composante_vert[0+b]
+f1=binaire_composante_vert[1+b]
+g1=binaire_composante_vert[2+b]
+h1=binaire_composante_vert[3+b]
+
+binaire_composante_vert[0+b]=e
+binaire_composante_vert[1+b]=f
+binaire_composante_vert[2+b]=g
+binaire_composante_vert[3+b]=h
+
+binaire_composante_vert[4+b]=e1
+binaire_composante_vert[5+b]=f1
+binaire_composante_vert[6+b]=g1
+binaire_composante_vert[7+b]=h1
+
+
+
+
+
+
+
+
+i=binaire_composante_bleu[4+b]
+j=binaire_composante_bleu[5+b]
+k=binaire_composante_bleu[6+b]
+l=binaire_composante_bleu[7+b]
+
+i1=binaire_composante_bleu[0+b]
+j1=binaire_composante_bleu[1+b]
+k1=binaire_composante_bleu[2+b]
+l1=binaire_composante_bleu[3+b]
+
+
+binaire_composante_bleu[0+b]=i
+binaire_composante_bleu[1+b]=j
+binaire_composante_bleu[2+b]=k
+binaire_composante_bleu[3+b]=l
+
+binaire_composante_bleu[4+b]=i1
+binaire_composante_bleu[5+b]=j1
+binaire_composante_bleu[6+b]=k1
+binaire_composante_bleu[7+b]=z_b
+
+
+
+
+
+
+
+
+}
+
+for (i=0 , b=0 ; i<PixelsImage.data.length;i=i+4 , b=b+8) {
+
+for(a=0;a<8;a++){
+binaire_composante_rouge_string = binaire_composante_rouge[a+b] + binaire_composante_rouge_string
+binaire_composante_vert_string =   binaire_composante_vert[a+b] + binaire_composante_vert_string
+binaire_composante_bleu_string =  binaire_composante_bleu[a+b] + binaire_composante_bleu_string
+binaire_composante_opa_string  =  binaire_composante_opa[a+b] + binaire_composante_opa_string
+}
+
+
+PixelsImage.data[i+1]=parseInt(binaire_composante_vert_string, 2)
+PixelsImage.data[i]=parseInt(binaire_composante_rouge_string, 2)
+PixelsImage.data[i+2]=parseInt(binaire_composante_bleu_string, 2)
+PixelsImage.data[i+3]=parseInt(binaire_composante_opa_string, 2)
+
+
+binaire_composante_rouge_string = ""
+binaire_composante_vert_string = ""
+binaire_composante_bleu_string = ""
+binaire_composante_opa_string= ""
+
+}
+ctx.putImageData(PixelsImage,0,0);
+binaire_composante_rouge = []
+binaire_composante_vert = []
+binaire_composante_bleu = []
+}
+
+
+
+
+
+
+
+
+
+
+
+function	binaire(nb){
+		var quotient=nb;
+		var liste="";
+
+			for (var i=0; i<7;i++){
+				liste= liste + quotient % 2;
+				quotient=(quotient-quotient % 2)/2;
+				
+			      }
+				  
+				  liste= liste + quotient % 2
+				
+			
+		return liste;
+		}
+</script>
+</body></html>

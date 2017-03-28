@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html"; >
+<meta charset="UTF-8">
+<title>Stegano</title>
+   <link rel="stylesheet" type="text/css" href="Stegano image.css" />
+</head>
+  <body>
+								
+					
+
+</div>
+
+<input id="Sauvegarde" value="Sauvegarder" type="button" onclick="SauvegardeCanvas ()" > </input>
+
+
+   <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
+</div>
+
+<div id="Etape" class="Etape" style="display:none;"> 
+</div>
+
+<div id="Upload" class="Upload" style="display:none;" >
+ <input id="file" type="file" onchange="onChange(this)">
+</div>
+
+<div id="Upload1" class="Upload" style="display:none;" >
+ <input id="file1" type="file" onchange="onChange1(this)">
+</div>
+
+<canvas id="monCanvas" style="display:none;"> </canvas>
+<canvas id="monCanvas1" style="display:none;"> </canvas>
+
+<div id="explication" class="explication" >
+  
+
+
+  
+  
+  <center><strong><big>Explication : </big></strong></center>
+<br/>
+<br/>
+<h1>
+Ceci est un programme permettant de cacher une image dans une autre image 
+<br/><br/>
+
+
+								<input value="C'est parti !" onclick="Etape_1()" maxlength="11" type="button" id="parti" >
+
+								</h1>
+</div>
+
+<input class= "Suivante" value="Etape Suivante" onclick="lol()" maxlength="110" type="button" id="Suivante_1"  style="display:none;">
+
+<div class="fond" id="fond">
+</div>
+
+<script type="text/javascript">
+ const allowedTypes = ["image/png", "image/jpg", "image/jpeg", "image/gif"];     
+var canvas = document.getElementById("monCanvas");
+var canvas1 = document.getElementById("monCanvas1");
+var ctx = canvas.getContext("2d");
+var ctx1 = canvas1.getContext("2d");
+var PixelsImage_image_a_cacher = []
+var PixelsImage = []
+
+var binaire_composante_rouge = []
+var binaire_composante_vert = []
+var binaire_composante_bleu = []
+var binaire_composante_opacite = []
+
+var binaire_composante_rouge_string = ""
+var binaire_composante_vert_string = ""
+var binaire_composante_bleu_string = ""
+
+var binaire_composante_rouge1 = []
+var binaire_composante_vert1 = []
+var binaire_composante_bleu1 = []
+var binaire_composante_opacite1 = []
+
+b=0
+x=0
+a=0
+mop=0
+
+
+var img = ""
+
+function Etape_1 (){
+document.getElementById("Suivante_1").style.display="block";
+document.getElementById("explication").style.display="none";
+document.getElementById("monCanvas").style.display="block";
+document.getElementById("monCanvas1").style.display="block";
+document.getElementById("titre").style.display="block";
+document.getElementById("titre").innerHTML="Etape 1"
+document.getElementById("Etape").style.display="block";
+document.getElementById("Etape").innerHTML="Ici , vous devez simplement choisir l'image dans laquel vous voulez que le texte soit introduit  "
+document.getElementById("Upload").style.display="block"
+document.getElementById("Upload1").style.display="block"
+}
+
+
+
+
+
+
+
+function onChange(sender)
+{
+   
+	
+	var file = sender.files[0];
+    var fileType = file["type"];
+    if(allowedTypes.indexOf(fileType) == -1)
+    {
+        alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+    }
+    else
+    {
+        var reader = new FileReader();
+        reader.onload = function(e)
+{
+    var img = new Image();
+    img.src = e.target.result;
+    img.onload = function()
+    {
+        ctx.canvas.width = img.width;
+        ctx.canvas.height = img.height;
+       
+        ctx.drawImage(img, 0, 0);
+        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+        ctx.putImageData(PixelsImage, 0, 0);
+
+		
+    }
+};
+        reader.readAsDataURL(file);
+    
+  }
+
+}
+
+
+function onChange1(sender)
+{
+   
+	
+	var file = sender.files[0];
+    var fileType = file["type"];
+    if(allowedTypes.indexOf(fileType) == -1)
+    {
+        alert("Format du fichier invalide. Les formats acceptés sont : gif, jpeg, png. ");
+    }
+    else
+    {
+        var reader = new FileReader();
+        reader.onload = function(e)
+{
+    var img1 = new Image();
+    img1.src = e.target.result
+    img1.onload = function()
+    {
+
+        canvas1.width = img1.width;
+        canvas1.height = img1.height;
+        canvas1.style.width = canvas.width + "px"
+		canvas1.style.height = canvas.height + "px"
+		
+        ctx1.drawImage(img1, 0, 0);
+        PixelsImage_image_a_cacher = ctx1.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx1.putImageData(PixelsImage_image_a_cacher, 0, 0);
+
+		
+    }
+};
+        reader.readAsDataURL(file);
+    
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function lol () {
+
+
+
+
+for (i=0 ; i<PixelsImage.data.length; i=i+4) {
+rouge = binaire(PixelsImage.data[i])
+vert=binaire(PixelsImage.data[i+1])
+bleu=binaire(PixelsImage.data[i+2])
+
+
+rouge1 = binaire(PixelsImage_image_a_cacher.data[i])
+vert1=binaire(PixelsImage_image_a_cacher.data[i+1])
+bleu1=binaire(PixelsImage_image_a_cacher.data[i+2])
+
+for(a=0 ; a<8 ; a++ ) {
+binaire_composante_rouge.push(rouge.charAt(a))
+binaire_composante_vert.push(vert.charAt(a))
+binaire_composante_bleu.push(bleu.charAt(a))
+
+binaire_composante_rouge1.push(rouge1.charAt(a))
+binaire_composante_vert1.push(vert1.charAt(a))
+binaire_composante_bleu1.push(bleu1.charAt(a))
+
+}
+}
+
+
+for (b=0 ; b<binaire_composante_rouge.length;b=b+8 ) {
+for (a=0 ; a<4;a++) {
+binaire_composante_rouge[a+b]=binaire_composante_rouge1[4+a+b]
+binaire_composante_vert[a+b]=binaire_composante_vert1[4+a+b]
+binaire_composante_bleu[a+b]=binaire_composante_bleu1[4+a+b]
+
+}
+}
+
+
+
+
+
+for (i=0 , b=0 ; i<PixelsImage.data.length;i=i+4 , b=b+8) {
+for(a=0;a<8;a++){
+binaire_composante_rouge_string = binaire_composante_rouge[a+b] + binaire_composante_rouge_string
+binaire_composante_vert_string =   binaire_composante_vert[a+b] + binaire_composante_vert_string
+binaire_composante_bleu_string =  binaire_composante_bleu[a+b] + binaire_composante_bleu_string
+}
+
+
+PixelsImage.data[i+1]=parseInt(binaire_composante_vert_string, 2)
+PixelsImage.data[i]=parseInt(binaire_composante_rouge_string, 2)
+PixelsImage.data[i+2]=parseInt(binaire_composante_bleu_string, 2)
+
+binaire_composante_rouge_string = ""
+binaire_composante_vert_string = ""
+binaire_composante_bleu_string = ""
+
+}
+
+alert()
+ctx.putImageData(PixelsImage,0,0);
+}
+
+
+
+
+function	binaire(nb){
+
+
+		var quotient=nb;
+		var liste="";
+
+			for (var i=0; i<8;i++){
+				liste= liste + quotient % 2;
+				quotient=(quotient-quotient % 2)/2;
+				
+			      }
+				  
+				  
+				
+			
+		return liste;
+		}
+		
+		
+				function SauvegardeCanvas()
+{
+var canvas = document.getElementById("monCanvas");
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+window.location.href = image;
+}
+</script>
+</body></html>
