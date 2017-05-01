@@ -8,7 +8,7 @@
 
 
 <body>
-
+<a id="page_principal" href="Page_Principal.html" target="_parent"> <img src="Home-512.png"> </img> </a>
   <div class="container"  >
 
    <div id="titre" class="titre" style="display:none;"> <!-- Le titre des etapes --> 
@@ -176,8 +176,9 @@
         ctx.canvas.height = img.height;
         canvas.style.maxWidth = '1000px';
         canvas.style.maxHeight = '800px';
-          ctx.drawImage(img, 0, 0);
-          PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+        ctx.drawImage(img, 0, 0);
+        PixelsImage = ctx.getImageData(0, 0, img.width, img.height);
+		canvas.style.borderStyle="ridge ridge ridge ridge" ;
           
           ctx.putImageData(PixelsImage, 0, 0);
         }

@@ -10,6 +10,13 @@ margin-right:auto;
 	
 }
 
+.textarea_cryptage{
+max-width:500px;
+max-height:200px;	
+min-width:100px;
+max-height:50px;
+}
+
 #patienter{
 color : white;  
 font-family : calibri;
@@ -19,7 +26,7 @@ font-size : 30pt;
 
 body
 {
-  background-color: black;
+  background-color: #91AA9D;
 }   
 
 #probleme {
@@ -38,7 +45,7 @@ margin-right: auto;
 
 #titre {
 font-size : 75px;
-color : white;
+color : #193441;
 font-family : calibri;
 border-width : 5px;
 border-color : grey;
@@ -52,7 +59,7 @@ margin-right:auto;
 
 #Etape {
 font-size : 40px;
-color : white;  
+color : #193441;  
 font-family : calibri;
 margin-top : 10px;
 margin-left:10px;
@@ -62,35 +69,35 @@ text-align : center;
 #Upload {
 text-align : center;
 margin-top : 10px;
-color : white;  
+color : #193441;  
 }
 
 #monCanvas{
+margin-top:20px;
 margin-left: auto;
 margin-right: auto;
-padding-top:10px;
+border:5px  black;
 } 
 
 .corp_page_explication {
 font-weight:bold;
 font-size:20pt; 
 font-family:Calibri;    
-
 }
-.Suivante{
-background: black;
+.Suivante {
+background: #D1DBBD;
 border-radius: 10px;
-color: #ffffff;
-font: 100% Georgia, "Calibri", Times, serif;
+color: #193441;
+font: 100% Georgia, "Caslibri", Times, serif;
 letter-spacing: 1px;
-text-align:center;
+margin-top :5px;
 padding: 7px 25px;
 text-shadow: 0 1px 1px #000000;
 text-transform: uppercase;
 cursor: pointer;
-position: relative; 
-margin-left:auto;
-margin-right:auto;
+position: relative;	
+margin-left: auto;
+margin-right: auto;
 }
 
 h1{
@@ -102,19 +109,60 @@ h2{
 font-family:Calibri;
 margin-left:10px;
 margin-top: 100px;
-color: white;
+color: #193441;
 font-size:23pt; 
 }
 
 p{
 font-family:Calibri;
 margin-left:10px;
-color: white;
+color: #193441;
 font-size:23pt; 
 }
 
+#cryptage{
+background-color: #193441;
+font-family:Calibri; 
+font-size:20pt;
+width : 39%;
+min-height: 550px;
+height : 650px;
+border: 5px groove black ;
+padding: 10px;  
+margin-left:50px;
+position:absolute;z-index:2;
+margin-top:4%;
+}
 
+#decryptage{
+background-color: #193441;
+font-family:Calibri; 
+font-size:20pt;
+width : 39%;
+min-height: 550px;
+height : 650px ;
+border: 5px groove black ;
+right: 50px;
+padding: 10px;  
+float: right;
+position:absolute;
+margin-top:4%;
+}
 
+#boutton_crypter {
+margin-left:35%;
+bottom : 40px;
+position:absolute;
+background: #000000;
+border-radius: 10px;
+font: 100% Georgia, "Calibri", Times, serif;
+color : white; 
+letter-spacing: 1px;
+padding: 7px 25px;
+text-shadow: 0 1px 1px #000000;
+text-transform: uppercase;
+cursor: pointer;	
+}
 
 .explication {
 background-color: white;
@@ -141,10 +189,16 @@ padding: 10px;
 
 }
 
+#resultat_cryptage{
+word-wrap : break-word
+}
 
+#resultat_decryptage{
+word-wrap : break-word
+}
 
 #option{
-background-color: white;
+background-color: #193441;
 font-family:Calibri; 
 width : 700px;
 height : 600px;
@@ -163,7 +217,6 @@ font-size:25pt;
 
 #parti {
 background: #C60800;
-
 border-radius: 10px;
 color: #ffffff;
 display: block;
@@ -195,7 +248,7 @@ margin-left: 5px;
 font-family:Calibri;
 margin-left:10px;
 margin-top: 100px;
-color: white;
+color: #193441;
 font-size:23pt; 
 position:relative;
 
@@ -221,21 +274,6 @@ width:250px;
 box-shadow:1px 1px 2px #C0C0C0 inset;
 font: 30px Georgia, "Calibri", Times, serif;
 position:relative;z-index:3;
-}
-
-#Sauvegarde{
-margin-left:55%;
-margin-top:40px;
-position:absolute;z-index:3;
-background: #FFFFFF;
-border-radius: 10px;
-font: 100% Georgia, "Calibri", Times, serif;
-letter-spacing: 1px;
-padding: 7px 25px;
-text-shadow: 0 1px 1px #000000;
-text-transform: uppercase;
-cursor: pointer;
-
 }
 
 #Recommencer_Image {
@@ -280,7 +318,6 @@ width:100px;
 background-color: white;
 font-family:Calibri;
 width : 97%;
-
 border: 5px groove black ;
 margin:auto;
 display: flex;
@@ -339,4 +376,6 @@ border-bottom :5px groove black ;
 
 }
 
-
+#page_principal{
+position:absolute;
+}

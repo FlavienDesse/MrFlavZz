@@ -4,7 +4,7 @@ html {
 
 }
 body{
-background:#111;
+background:#91AA9D;
 }
 
 .debut_texte{
@@ -19,36 +19,38 @@ height: 100%;
 h1{
 margin-top:10px;
 text-align:center;	
-color:#AAAAAA;
+color:#193441;
 	font-size:40px;
 }
 
 .titre_souligne{
   text-decoration: underline;
-  text-decoration-color: pink;
+  text-decoration-color: #FCFFF5;
 
 }
 
 h2{
 text-align:center;	
-color:#AAAAAA;	
+color:#193441;	
 margin-top:25px;
-font-size:30px;.
+font-size:30px;
 }
 
 
 fieldset {
 border:2px solid ;	
  border-radius:8px;	
-color:#AAAAAA;	
+color:#193441;	
 margin-top:10px;
 margin-left:20px;
 margin-right:20px;
 padding-left:10px;
+background-color:#D1DBBD;
 }
 
 legend {
 font-size:25px;
+color:black;
 margin-bottom:5px;
 margin-left:55px;
 font-weight:bold;
@@ -57,33 +59,32 @@ font-weight:bold;
 
 
 .lien-bouton{
-   color:grey;
+   color:#193441;
    font-family:verdana;
    font-size:18px;
    padding:5px 20px;
    text-decoration:none;
-   border:solid 1px grey;
+   border:solid 1px #193441;
    border-radius:5px;
    margin-top:30px;
 }
 .lien-bouton:hover{
-
-   border:solid 1px white;
+   border:solid 1px #FCFFF5;
 } 
  #Programme{
 margin-left : 30%;
 margin-right : 30%;
 padding-top: 20px;
-border:solid 4px grey;
+border:solid 4px #FCFFF5;
 padding-bottom: 20px;
 text-align:center;
-color:#AAAAAA;
+color:#193441;
  border-radius:8px;	
  }
  
  #titre {
 font-family:verdana;
-color:#AAAAAA;
+color:#193441;
 font-size:20px; 	 
  }
 
@@ -102,9 +103,9 @@ padding-bottom:10px;
 }
 
 #Suivant {
-background: black;
+background: #91AA9D;
 border-radius: 10px;
-color: #ffffff;
+color: #193441;
 font: 100% Georgia, "Calibri", Times, serif;
 letter-spacing: 1px;
 margin-top :5px;
